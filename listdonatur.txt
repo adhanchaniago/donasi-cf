@@ -1,0 +1,35 @@
+<?php
+                        foreach ($listdonatur->result() as $key) {
+                            $pengguna = $this->model_pengguna->get_one($key->id_pengguna)->row_array();
+
+                            ?>
+
+                            <!-- single post -->
+                            <div class="widget-post">
+                                <a href="#">
+                                    <div class="widget-img">
+                                        <img width="60px" height="60px"
+                                             src="<?= base_url() ?>./assets/images/foto/anon.jpg" alt="">
+                                        <?php
+                                        if ($key->tampil_nama == "Y") {
+                                            ?>
+                                            <br><a><?= $pengguna['nama'] ?></a><br>
+                                            <?php
+                                        } else {
+                                            ?>
+                                            <br><a>Anonim</a><br>
+                                            <?php
+                                        }
+                                        ?>
+                                        <a>Waktu :
+                                            <?=date_indo($key->tgl_donasi)?>
+                                        </a>
+                                        <br>
+                                        <a>Jumlah : Rp. <?= nominal($key->jum_transfer + $key->id_donatur) ?></a>
+                                    </div>
+                                </a>
+                            </div>
+                            <!-- /single post -->
+                            <?php
+                        }
+                        ?>
